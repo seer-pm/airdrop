@@ -1,66 +1,30 @@
-## Foundry
+# Seer Airdrop contracts
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+This repository contains smart contracts and scripts for distributing Seer credits to participants.
 
-Foundry consists of:
+## Prerequisites
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+- [Foundry](https://book.getfoundry.sh/getting-started/installation) installed
 
-## Documentation
+## Environment Setup
 
-https://book.getfoundry.sh/
+1. Clone this repository
+2. Create a `.env` file in the root directory with the following variables:
 
-## Usage
-
-### Build
-
-```shell
-$ forge build
+```
+PRIVATE_KEY=                     # Your wallet's private key for deploying contracts
+GOVERNED_RECIPIENT_ADDRESS=      # Address of the deployed GovernedRecipient contract (needed for adding recipients)
+GNOSISSCAN_API_KEY=             # API key from https://gnosisscan.io to verify contracts
 ```
 
-### Test
+## Deploy contracts
 
-```shell
-$ forge test
-```
+`forge script script/Deploy.s.sol:Deploy --rpc-url gnosis --broadcast --verify -vvvv --etherscan-api-key gnosis`
 
-### Format
+## Create recipients.json
 
-```shell
-$ forge fmt
-```
+Use the `recipients.json.dist` file as template.
 
-### Gas Snapshots
+## Add recipients
 
-```shell
-$ forge snapshot
-```
-
-### Anvil
-
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+`forge script script/AddRecipients.s.sol:AddRecipients --rpc-url gnosis --broadcast -vvvv --via-ir`
