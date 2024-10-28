@@ -48,7 +48,7 @@ contract MultiDrop {
     /// @dev Change a token and amount. To be used to replace a token (for example after the market result is known).
     /// @param _i The index of the token to change.
     /// @param _token The new token. If the address is null, no token will be given. TRUSTED
-    /// @param _amount The new amuount.
+    /// @param _amount The new amount.
     function changeToken(uint _i, ERC20 _token, uint _amount) external onlyGovernor {
         tokens[_i] = _token;
         amounts[_i] = _amount;
@@ -66,8 +66,11 @@ contract MultiDrop {
                 require(tokens[i].transfer(msg.sender,amounts[i]));
             }
         }
-
     }
 
-
+    /// @dev Returns all the tokens.
+    /// @return The addresses of the tokens.
+    function allTokens() external view returns (ERC20[] memory) {
+        return tokens;
+    }
 }
