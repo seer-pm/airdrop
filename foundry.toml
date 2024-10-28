@@ -1,0 +1,11 @@
+[profile.default]
+src = "src"
+out = "out"
+libs = ["lib"]
+fs_permissions = [{ access = "read", path = "./" }]
+
+[rpc_endpoints]
+gnosis = "https://rpc.gnosischain.com"
+
+[etherscan]
+gnosis = { key = "${GNOSISSCAN_API_KEY}", url = "https://api.gnosisscan.io/api" }
