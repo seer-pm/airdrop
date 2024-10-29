@@ -74,7 +74,7 @@ contract MultiDrop {
         return tokens;
     }
 
-    /// @dev Withdraws the entire balance of a specific token to the governor address.
+    /// @dev Withdraws the entire balance of a specific token to the governor.
     /// @param _tokenToWithdraw The address of the token to withdraw.
     function withdrawToken(address _tokenToWithdraw) external onlyGovernor {
         ERC20 tokenContract = ERC20(_tokenToWithdraw);
@@ -83,7 +83,7 @@ contract MultiDrop {
     }
 
 
-    /// @dev Withdraws all tokens to the governor address.
+    /// @dev Withdraws all tokens to the governor.
     function withdrawAllTokens() external onlyGovernor {
         for (uint i; i < tokens.length; ++i) {
             if (address(tokens[i]) != address(0)) {
