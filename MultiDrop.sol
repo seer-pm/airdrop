@@ -73,4 +73,23 @@ contract MultiDrop {
     function allTokens() external view returns (ERC20[] memory) {
         return tokens;
     }
+
+    /// @dev Withdraws the entire balance of a specific token to the governor.
+    /// @param _tokenToWithdraw The address of the token to withdraw.
+    function withdrawToken(address _tokenToWithdraw) external onlyGovernor {
+        ERC20 tokenContract = ERC20(_tokenToWithdraw);
+        uint256 balance = tokenContract.balanceOf(address(this));
+        require(tokenContract.transfer(governor, balance));
+    }
+
+
+    /// @dev Withdraws all tokens to the governor.
+    function withdrawAllTokens() external onlyGovernor {
+        for (uint i; i < tokens.length; ++i) {
+            if (address(tokens[i]) != address(0)) {
+                uint256 balance = tokens[i].balanceOf(address(this));
+                require(tokens[i].transfer(governor, balance));
+            }
+        }
+    }
 }
