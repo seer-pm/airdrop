@@ -28,3 +28,7 @@ Use the `recipients.json.dist` file as template.
 ## Add recipients
 
 `forge script script/AddRecipients.s.sol:AddRecipients --rpc-url gnosis --broadcast -vvvv --via-ir`
+
+## Add recipients - batch script
+`./script/add_recipients_batch.sh humans-gnosis`
+`./script/add_recipients_batch.sh humans-mainnet`
